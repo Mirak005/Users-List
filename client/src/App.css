@@ -1,0 +1,14 @@
+*{
+  list-style: none;
+}
+.user-info{
+  border: none;
+  outline: 0;
+  padding: 0.5rem;
+}
+.edited-active{
+  border: 0.5px solid #5555554b;
+  border-radius: 5px ;
+  outline:rgba(0, 128, 0, 0.151);
+  padding: 0.5rem;
+}
