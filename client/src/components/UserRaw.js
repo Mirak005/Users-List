@@ -8,7 +8,7 @@ import gallery from "../assets/icons/gallery.svg";
 import remove from "../assets/icons/delete.svg";
 
 function UserRaw({
-  user: { name, lastName, birthYear, birthLocation, id },
+  user: { name, lastName, birthYear, birthLocation ,_id},
   handleEdit,
   handleDelete,
   index
@@ -26,7 +26,7 @@ function UserRaw({
   // on Click apply the edit
   const handleIsEdited = () => {
       setEdit(!isEdited);
-      handleEdit(id, editedUser);
+      handleEdit(_id, editedUser);
     }
     //handleChanges 
   const handelChange = e => {
@@ -87,7 +87,7 @@ function UserRaw({
               as="input"
               type="submit"
               src={remove}
-              onClick={()=>  handleDelete(id)}
+              onClick={()=>  handleDelete(_id)}
 
             />
           </td>
