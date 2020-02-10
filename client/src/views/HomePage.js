@@ -14,8 +14,8 @@ import {
   addUser,
   deleteUser
 } from "../js/actions/userActions";
-import UsersList from "./UsersList";
-import AddUserModal from "./AddUserModal";
+import UsersList from "../components/UsersList";
+import AddUserModal from "../components/Modals/AddUserModal";
 import search from "../assets/icons/search.svg";
 
 class HomePage extends Component {

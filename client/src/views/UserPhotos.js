@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { addPhoto, deletePhoto } from "../js/actions/PhotoActions";
-import AddPhotoModal from "./AddPhotoModal";
-import PhotoCard from "./PhotosCard";
+import AddPhotoModal from "../components/Modals/AddPhotoModal";
+import PhotoCard from "../components/PhotosCard";
 import search from "../assets/icons/search.svg";
 import {
   Container,

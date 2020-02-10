@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import HomePage from "./components/HomePage";
-import UserPhotos from "./components/UserPhotos";
+import HomePage from "./views/HomePage";
+import UserPhotos from "./views/UserPhotos";
 import store from "./store";
 import { getPhotos } from "./js/actions/PhotoActions";
 import { getUsers } from "./js/actions/userActions";

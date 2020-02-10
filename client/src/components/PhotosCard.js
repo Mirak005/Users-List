@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Image } from "react-bootstrap";
 import remove from "../assets/icons/delete.svg";
-import PhotoModal from "./PhotoModal";
+import PhotoModal from "./Modals/PhotoModal";
 
 function PhotosCard({ photo, deletePhoto }) {
   const [show, setShow] = useState(false);
