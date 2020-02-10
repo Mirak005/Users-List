@@ -1,41 +1,54 @@
-import React ,{Component} from 'react'
-import { connect } from "react-redux"
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { addPhoto , deletePhoto} from "../js/actions/PhotoActions"
-import AddPhotoModal from "./AddPhotoModal"
-import view from "../assets/icons/view.svg";
+import { addPhoto, deletePhoto } from "../js/actions/PhotoActions";
+import AddPhotoModal from "./AddPhotoModal";
+import PhotoCard from "./PhotosCard";
 import search from "../assets/icons/search.svg";
-import {Container , Row ,Col ,InputGroup ,FormControl ,Image} from "react-bootstrap"
+import {
+  Container,
+  Row,
+  Col,
+  InputGroup,
+  FormControl,
+  Image,
+  Spinner
+} from "react-bootstrap";
 
+class UserPhotos extends Component {
+  state = {
+    searchFilter: ""
+  };
 
-
-
-
-
-class UserPhotos extends Component  {
-  state={
-    searchFilter:""
-  }
-
-    // handle Search
-    handleSearch = e => this.setState({ searchFilter: e.target.value });
-    // filter Photo by Title
+  // handle Search
+  handleSearch = e => this.setState({ searchFilter: e.target.value });
+  // filter Photo by Title
   filterPhoto = arrayOfPhotos =>
-  arrayOfPhotos.filter(({ title }) => {
-    const photoInfo = title;
-    return photoInfo
-      .toLowerCase()
-      .includes(this.state.searchFilter.toLowerCase().trim());
-  });
+    arrayOfPhotos.filter(({ title }) => {
+      const photoInfo = title;
+      return photoInfo
+        .toLowerCase()
+        .includes(this.state.searchFilter.toLowerCase().trim());
+    });
 
-    render(){
-      const user = this.props.match.params.id
-      console.log(user)
+  //handleLoading
+  comoponentIsLoading = component =>
+    this.props.photos.isLoading ? (
+      <Row className="d-flex justify-content-center mt-5">
+        <Spinner animation="grow" />
+      </Row>
+    ) : (
+      component
+    );
+
+  render() {
+    const user = this.props.match.params.id;
+    const userName = this.props.match.params.userName;
     return (
-        <Container fluid>
+      <Container fluid>
         <Row className="pt-5 pb-4 ">
           <Col className="col-8">
-            <h1>Karim Gharbi </h1>
+            <h1>{`${userName} Gallery` }</h1>
           </Col>
           <Col className="col-2 align-self-center">
             <InputGroup>
@@ -50,19 +63,29 @@ class UserPhotos extends Component  {
             </InputGroup>
           </Col>
           <Col className="col-1 d-flex  align-self-center">
-            <AddPhotoModal 
-            user={user} 
-            addPhoto={this.props.addPhoto}
-            />
+            <AddPhotoModal user={user} addPhoto={this.props.addPhoto} />
           </Col>
         </Row>
-        {this.filterPhoto(this.props.photos.photos).filter(e=> e.user ==user).map(e=> <h2>{e.title}</h2> )}
-        </Container>
-    )}
+        {this.comoponentIsLoading(
+          <Row className="d-flex justify-content-center flex-wrap mt-3">
+            {this.filterPhoto(this.props.photos.photos)
+              .filter(e => e.user == user)
+              .map(photo => (
+                <PhotoCard
+                  key={photo._id}
+                  photo={photo}
+                  deletePhoto={this.props.deletePhoto}
+                />
+              ))}
+          </Row>
+        )}
+      </Container>
+    );
+  }
 }
 const mapStateToProps = state => ({
-    photos: state.photos
-  });
-  
+  photos: state.photos,
+  users: state.users.users
+});
 
-export default connect(mapStateToProps , {addPhoto})(UserPhotos)
+export default connect(mapStateToProps, { addPhoto, deletePhoto })(UserPhotos);

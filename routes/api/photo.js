@@ -17,7 +17,7 @@ Router.post("/:id", validationPhoto(), validate, async (req, res) => {
   const { title, path } = req.body;
 
   try {
-    const photoExist = await Photo.findOne({ path, user: id });
+    // const photoExist = await Photo.findOne({ path, user: id });
     const userExist = await User.findById(id);
 
     //check if user dosent exists
@@ -25,8 +25,8 @@ Router.post("/:id", validationPhoto(), validate, async (req, res) => {
       return res.status(400).json({ message: "User dosent exists" });
 
     //check if photo exists
-    if (photoExist)
-      return res.status(400).json({ message: "Photo already exists" });
+    // if (photoExist)
+    //   return res.status(400).json({ message: "Photo already exists" });
 
     // create new Photo
     const newPhoto = new Photo({ title, path, user: id });

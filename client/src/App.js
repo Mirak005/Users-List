@@ -16,7 +16,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/gallery/:id" component={UserPhotos} />
+        <Route exact path="/:userName/:id" component={UserPhotos} />
       </Switch>
     </BrowserRouter>
   );

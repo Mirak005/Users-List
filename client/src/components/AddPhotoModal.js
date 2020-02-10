@@ -58,7 +58,6 @@ function AddPhotoModal({ addPhoto , user  }) {
               className="mb-3"
               name="path"
               placeholder="path ..."
-              maxLength="16"
             />
           </Modal.Body>
           <Modal.Footer>

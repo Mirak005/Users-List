@@ -75,7 +75,7 @@ function UserRaw({
             />
           </td>
           <td>
-          <Link to={`/gallery/${_id}`} > <Image  className=" mr-3" as="input" type="submit" src={gallery}  /></Link> 
+          <Link to={`/${name} ${lastName}/${_id}`} > <Image  className=" mr-3" as="input" type="submit" src={gallery}  /></Link> 
             <Image
               className="ml-3 mr-2"
               as="input"
