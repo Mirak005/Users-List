@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom"
 import FormControl from "react-bootstrap/FormControl";
 import Image from "react-bootstrap/Image";
 
@@ -8,15 +9,14 @@ import gallery from "../assets/icons/gallery.svg";
 import remove from "../assets/icons/delete.svg";
 
 function UserRaw({
-  user: { name, lastName, birthYear, birthLocation ,_id},
+  user: { name, lastName, birthYear, birthLocation, _id },
   handleEdit,
   handleDelete,
   index
 }) {
-
-    //check if the user is on edit state to disable the readOnly 
+  //check if the user is on edit state to disable the readOnly
   const [isEdited, setEdit] = useState(false);
-  //save the changes in edited User 
+  //save the changes in edited User
   const [editedUser, setEditedUser] = useState({
     name,
     lastName,
@@ -25,10 +25,11 @@ function UserRaw({
   });
   // on Click apply the edit
   const handleIsEdited = () => {
-      setEdit(!isEdited);
-      handleEdit(_id, editedUser);
-    }
-    //handleChanges 
+    handleEdit(_id, editedUser);
+
+    setEdit(!isEdited);
+  };
+  //handleChanges
   const handelChange = e => {
     setEditedUser({ ...editedUser, [e.target.name]: e.target.value });
   };
@@ -74,21 +75,20 @@ function UserRaw({
             />
           </td>
           <td>
-            <Image className=" mr-3" as="input" type="submit" src={gallery} />
+          <Link to={`/gallery/${_id}`} > <Image  className=" mr-3" as="input" type="submit" src={gallery}  /></Link> 
             <Image
               className="ml-3 mr-2"
               as="input"
               type="submit"
               src={isEdited ? tick : edit}
-              onClick={ handleIsEdited}
+              onClick={e => (isEdited ? handleIsEdited() : setEdit(!isEdited))}
             />
             <Image
               className="ml-2 mr-2"
               as="input"
               type="submit"
               src={remove}
-              onClick={()=>  handleDelete(_id)}
-
+              onClick={() => handleDelete(_id)}
             />
           </td>
         </tr>

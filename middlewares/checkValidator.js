@@ -10,8 +10,8 @@ exports.validationUser = () => [
 
 //validate add Photo
 exports.validationPhoto = () => [
-  check("title ", "Title is Required ").notEmpty(),
-  check("path ", "Image Link is Required ").notEmpty()
+  check("title", "Title is Required ").notEmpty(),
+  check("path", "Image Link is Required ").notEmpty()
 ];
 
 exports.validate = (req, res, next) => {

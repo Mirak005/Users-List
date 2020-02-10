@@ -32,7 +32,8 @@ export const deleteUser = id => dispatch => {
 
 //edit user by id
 export const editUser = (id, editedUser) => dispatch => {
-  axios.put(`/api/user/${id}`, editedUser).then(res => dispatch(getUsers()));
+  axios.put(`/api/user/${id}`, editedUser).
+  then(res => dispatch(getUsers())).catch(err =>console.log("edit error"))
 };
 
 // Users Loading

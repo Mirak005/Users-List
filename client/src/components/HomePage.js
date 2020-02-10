@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 import Image from "react-bootstrap/Image";
+import Spinner from "react-bootstrap/Spinner";
 
 import {
   getUsers,
@@ -16,8 +17,6 @@ import {
 import UsersList from "./UsersList";
 import AddUserModal from "./AddUserModal";
 import search from "../assets/icons/search.svg";
-import view from "../assets/icons/view.svg";
-
 
 
 class HomePage extends Component {
@@ -46,6 +45,16 @@ class HomePage extends Component {
         .includes(this.state.searchFilter.toLowerCase().trim());
     });
 
+  //handleLoading
+  comoponentIsLoading = component =>
+    this.props.users.isLoading ? (
+      <Row className="d-flex justify-content-center mt-5">
+        <Spinner animation="grow" />
+      </Row>
+    ) : (
+      component
+    );
+
   render() {
     return (
       <Container fluid>
@@ -69,11 +78,14 @@ class HomePage extends Component {
             <AddUserModal handleAdd={this.handleAdd} />
           </Col>
         </Row>
-        <UsersList
-          users={this.filterUser(this.props.users.users)}
-          handleEdit={this.handleEdit}
-          handleDelete={this.handleDelete}
-        />
+        {this.comoponentIsLoading(
+          <UsersList
+            users={this.filterUser(this.props.users.users)}
+            handleEdit={this.handleEdit}
+            handleDelete={this.handleDelete}
+            comoponentIsLoading={this.comoponentIsLoading}
+          />
+        )}
       </Container>
     );
   }

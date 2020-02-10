@@ -6,6 +6,7 @@ export const EDIT_USER = "EDIT_USER ";
 export const DELETE_USER= "DELETE_USER";
 
 //Gallery
-export const LOAD_PHOTOS = "LOAD_PHOTOS ";
+export const PHOTOS_LOADING="PHOTOS_LOADING"
+export const GET_PHOTOS = "GET_PHOTOS ";
 export const ADD_PHOTO= "ADD_PHOTO";
 export const DELETE_PHOTO = "DELETE_PHOTO ";

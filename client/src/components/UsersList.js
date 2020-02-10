@@ -5,7 +5,7 @@ import UserRaw from "./UserRaw";
 
 
 
-function UsersList({users , handleEdit ,handleDelete}) {
+function UsersList({users , handleEdit ,handleDelete }) {
   
  
 
