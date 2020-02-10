@@ -1,11 +1,5 @@
 import axios from "axios";
-import {
-  USERS_LOADING,
-  GET_USERS,
-  EDIT_USER,
-  DELETE_USER,
-  ADD_USER
-} from "../const/actionTypes";
+import { USERS_LOADING, GET_USERS } from "../const/actionTypes";
 
 //get all users
 export const getUsers = () => dispatch => {
@@ -32,8 +26,10 @@ export const deleteUser = id => dispatch => {
 
 //edit user by id
 export const editUser = (id, editedUser) => dispatch => {
-  axios.put(`/api/user/${id}`, editedUser).
-  then(res => dispatch(getUsers())).catch(err =>console.log("edit error"))
+  axios
+    .put(`/api/user/${id}`, editedUser)
+    .then(res => dispatch(getUsers()))
+    .catch(err => console.log("edit error"));
 };
 
 // Users Loading

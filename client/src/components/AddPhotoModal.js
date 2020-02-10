@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-function AddPhotoModal({ addPhoto , user  }) {
+function AddPhotoModal({ addPhoto, user }) {
   //handle Modal
   const [show, setShow] = useState(false);
 
@@ -22,7 +22,7 @@ function AddPhotoModal({ addPhoto , user  }) {
   const addNewPhoto = () => {
     if (Object.values(newPhoto).indexOf("") === -1) {
       setShow(false);
-      addPhoto( user ,newPhoto)
+      addPhoto(user, newPhoto);
       setNewPhoto({
         title: "",
         path: ""
@@ -64,10 +64,7 @@ function AddPhotoModal({ addPhoto , user  }) {
             <Button variant="secondary" onClick={handeShow}>
               Close
             </Button>
-            <Button
-             variant="primary"
-              onClick={addNewPhoto}
-              >
+            <Button variant="primary" onClick={addNewPhoto}>
               Add Photo
             </Button>
           </Modal.Footer>

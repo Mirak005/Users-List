@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Image, Row } from "react-bootstrap";
+import { Card, Image } from "react-bootstrap";
 import remove from "../assets/icons/delete.svg";
 import PhotoModal from "./PhotoModal";
 

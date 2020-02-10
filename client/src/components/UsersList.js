@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Table from "react-bootstrap/Table";
 
 import UserRaw from "./UserRaw";
 
-
-
-function UsersList({users , handleEdit ,handleDelete }) {
-  
- 
-
+function UsersList({ users, handleEdit, handleDelete }) {
   return (
     <Table responsive>
       <thead>

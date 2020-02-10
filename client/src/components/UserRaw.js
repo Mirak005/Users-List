@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import FormControl from "react-bootstrap/FormControl";
 import Image from "react-bootstrap/Image";
 
@@ -75,7 +75,10 @@ function UserRaw({
             />
           </td>
           <td>
-          <Link to={`/${name} ${lastName}/${_id}`} > <Image  className=" mr-3" as="input" type="submit" src={gallery}  /></Link> 
+            <Link to={`/${name} ${lastName}/${_id}`}>
+              {" "}
+              <Image className=" mr-3" as="input" type="submit" src={gallery} />
+            </Link>
             <Image
               className="ml-3 mr-2"
               as="input"

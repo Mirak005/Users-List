@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, Image } from "react-bootstrap";
 
 import view from "../assets/icons/view.svg";
 
-function PhotoModal({ path , show , handleShow }) {
-
- 
-
+function PhotoModal({ path, show, handleShow }) {
   return (
     <>
       <Image
@@ -18,7 +15,7 @@ function PhotoModal({ path , show , handleShow }) {
       />
 
       <Modal show={show} onHide={handleShow}>
-        <Image src={path} style={{height:"30rem"}} />
+        <Image src={path} style={{ height: "30rem" }} />
       </Modal>
     </>
   );

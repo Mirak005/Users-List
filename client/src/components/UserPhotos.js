@@ -48,7 +48,7 @@ class UserPhotos extends Component {
       <Container fluid>
         <Row className="pt-5 pb-4 ">
           <Col className="col-8">
-            <h1>{`${userName} Gallery` }</h1>
+            <h1>{`${userName} Gallery`}</h1>
           </Col>
           <Col className="col-2 align-self-center">
             <InputGroup>
@@ -69,7 +69,7 @@ class UserPhotos extends Component {
         {this.comoponentIsLoading(
           <Row className="d-flex justify-content-center flex-wrap mt-3">
             {this.filterPhoto(this.props.photos.photos)
-              .filter(e => e.user == user)
+              .filter(e => e.user === user)
               .map(photo => (
                 <PhotoCard
                   key={photo._id}

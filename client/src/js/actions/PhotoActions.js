@@ -1,10 +1,5 @@
 import axios from "axios";
-import {
-  GET_PHOTOS,
-  DELETE_PHOTO,
-  ADD_PHOTO,
-  PHOTOS_LOADING
-} from "../const/actionTypes";
+import { GET_PHOTOS, PHOTOS_LOADING } from "../const/actionTypes";
 
 //get All photos
 

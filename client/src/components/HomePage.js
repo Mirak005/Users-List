@@ -18,7 +18,6 @@ import UsersList from "./UsersList";
 import AddUserModal from "./AddUserModal";
 import search from "../assets/icons/search.svg";
 
-
 class HomePage extends Component {
   state = {
     users: [],
