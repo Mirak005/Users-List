@@ -37,7 +37,6 @@ Router.post("/", validationUser() , validate , async (req, res) => {
 //@ Public
 Router.put("/:id", async (req, res) => {
   const { id } = req.params;
-  console.log(id);
 
   try {
     //find user by id and update

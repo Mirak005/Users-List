@@ -8,8 +8,7 @@ const connectDB = () => {
     .connect(MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      // useFindAndModify: false,
-      // useCreateIndex: true
+      useFindAndModify: false,
     })
     .then(() => console.log("Mongo DB is Connected ..."))
     .catch(err => console.log(err));
