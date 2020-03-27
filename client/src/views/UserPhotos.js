@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { addPhoto, deletePhoto } from "../js/actions/PhotoActions";
@@ -47,7 +48,7 @@ class UserPhotos extends Component {
     return (
       <Container fluid>
         <Row className="pt-5 pb-4 ">
-          <Col className="col-8">
+          <Col className="col-7">
             <h1>{`${userName} Gallery`}</h1>
           </Col>
           <Col className="col-2 align-self-center">
@@ -65,6 +66,8 @@ class UserPhotos extends Component {
           <Col className="col-1 d-flex  align-self-center">
             <AddPhotoModal user={user} addPhoto={this.props.addPhoto} />
           </Col>
+          <Col><Link to="/" >Back to Users List  </Link></Col>
+
         </Row>
         {this.comoponentIsLoading(
           <Row className="d-flex justify-content-center flex-wrap mt-3">
