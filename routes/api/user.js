@@ -7,11 +7,12 @@ const {
 } = require("../../middlewares/checkValidator");
 
 const User = require("../../models/User");
+const Photo = require("../../models/Photo");
 
 //@ Route POST api/user
 //@ Description Create user
 //@ Public
-Router.post("/", validationUser() , validate , async (req, res) => {
+Router.post("/", validationUser(), validate, async (req, res) => {
   try {
     const { name, lastName, birthYear, birthLocation } = req.body;
 
@@ -59,10 +60,15 @@ Router.delete("/:id", async (req, res) => {
 
   // delete the user and it s photos !
   try {
+    
     const deletedUser = await User.findByIdAndDelete({ _id: id });
     if (!deletedUser)
       return res.status(400).json({ message: "User dosent exist" });
+
+        //Delete User photos 
+    await Photo.deleteMany({user : id })
     res.json(deletedUser);
+  
   } catch (error) {
     res.status(500).json(error.message);
   }
