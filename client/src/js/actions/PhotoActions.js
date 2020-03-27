@@ -13,6 +13,8 @@ export const getPhotos = () => dispatch => {
 
 //delete photo
 export const deletePhoto = id => dispatch => {
+  dispatch(setPhotosLoading());
+
   axios
     .delete(`/api/photo/${id}`)
     .then(res => dispatch(getPhotos()))
@@ -20,6 +22,8 @@ export const deletePhoto = id => dispatch => {
 };
 //add photo
 export const addPhoto = (id, newPhoto) => dispatch => {
+  dispatch(setPhotosLoading());
+
   axios
     .post(`/api/photo/${id}`, newPhoto)
     .then(res => dispatch(getPhotos()))

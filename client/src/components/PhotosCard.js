@@ -18,8 +18,8 @@ function PhotosCard({ photo, deletePhoto }) {
           src={photo.path}
           style={{ width: "18rem", height: "13rem" }}
         />
-        <Card.Body className=" d-flex justify-content-center">
-          <Card.Text className="font-weight-bold ">{photo.title}</Card.Text>
+        <Card.Body className=" d-flex justify-content-center align-items-center">
+          <Card.Text className="font-weight-bold mt-3 ">{photo.title}</Card.Text>
 
           <PhotoModal path={photo.path} handleShow={handleShow} show={show} />
           <Image

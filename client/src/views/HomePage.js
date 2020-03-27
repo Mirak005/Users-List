@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -18,35 +19,38 @@ import UsersList from "../components/UsersList";
 import AddUserModal from "../components/Modals/AddUserModal";
 import search from "../assets/icons/search.svg";
 
-class HomePage extends Component {
-  state = {
-    users: [],
-    searchFilter: ""
-  };
+const HomePage = () => {
+  const users = useSelector(state => state.users);
+
+  const dispatch = useDispatch();
+
+  // const aaddUser = newUser => dispatch(addUser(newUser));
+  // const eeditUser = (id, editedUser) => dispatch(editUser(id, editedUser));
+  // const ddeleteUser = id => dispatch(deleteUser(id));
+
+  const [searchFilter, setSearch] = useState("");
 
   //Add a User
-  handleAdd = newUser => this.props.addUser(newUser);
+  const handleAdd = newUser => dispatch(addUser(newUser));
   // Edit user
-  handleEdit = (id, newUser) => this.props.editUser(id, newUser);
+  const handleEdit = (id, editedUser) => dispatch(editUser(id, editedUser));
 
   //handle Delete
-  handleDelete = id => this.props.deleteUser(id);
+  const handleDelete = id => dispatch(deleteUser(id));
 
   // handle Search
-  handleSearch = e => this.setState({ searchFilter: e.target.value });
+  const handleSearch = e => setSearch(e.target.value);
 
   // filter users
-  filterUser = arrayOfUsers =>
+  const filterUser = arrayOfUsers =>
     arrayOfUsers.filter(({ name, lastName }) => {
       const userInfo = `${name} ${lastName}`;
-      return userInfo
-        .toLowerCase()
-        .includes(this.state.searchFilter.toLowerCase().trim());
+      return userInfo.toLowerCase().includes(searchFilter.toLowerCase().trim());
     });
 
   //handleLoading
-  comoponentIsLoading = component =>
-    this.props.users.isLoading ? (
+  const comoponentIsLoading = component =>
+    users.isLoading ? (
       <Row className="d-flex justify-content-center mt-5">
         <Spinner animation="grow" />
       </Row>
@@ -54,49 +58,37 @@ class HomePage extends Component {
       component
     );
 
-  render() {
-    return (
-      <Container fluid>
-        <Row className="pt-5 pb-4  ">
-          <Col className="col-8">
-            <h1>Users List </h1>
-          </Col>
-          <Col className="col-2 align-self-center">
-            <InputGroup>
-              <InputGroup.Prepend>
-                <Image src={search} className="mr-2" />
-              </InputGroup.Prepend>
-              <FormControl
-                type="text"
-                placeholder="Search..."
-                onChange={this.handleSearch}
-              />
-            </InputGroup>
-          </Col>
-          <Col className="col-1 d-flex  align-self-center">
-            <AddUserModal handleAdd={this.handleAdd} />
-          </Col>
-        </Row>
-        {this.comoponentIsLoading(
-          <UsersList
-            users={this.filterUser(this.props.users.users)}
-            handleEdit={this.handleEdit}
-            handleDelete={this.handleDelete}
-            comoponentIsLoading={this.comoponentIsLoading}
-          />
-        )}
-      </Container>
-    );
-  }
-}
+  return (
+    <Container fluid>
+      <Row className="pt-5 pb-4  ">
+        <Col className="col-8">
+          <h1>Users List </h1>
+        </Col>
+        <Col className="col-2 align-self-center">
+          <InputGroup>
+            <InputGroup.Prepend>
+              <Image src={search} className="mr-2" />
+            </InputGroup.Prepend>
+            <FormControl
+              type="text"
+              placeholder="Search..."
+              onChange={handleSearch}
+            />
+          </InputGroup>
+        </Col>
+        <Col className="col-1 d-flex  align-self-center">
+          <AddUserModal handleAdd={handleAdd} />
+        </Col>
+      </Row>
+      {comoponentIsLoading(
+        <UsersList
+          users={filterUser(users.users)}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+        />
+      )}
+    </Container>
+  );
+};
 
-const mapStateToProps = state => ({
-  users: state.users
-});
-
-export default connect(mapStateToProps, {
-  getUsers,
-  addUser,
-  deleteUser,
-  editUser
-})(HomePage);
+export default HomePage;

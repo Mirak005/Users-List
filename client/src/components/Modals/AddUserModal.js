@@ -28,7 +28,11 @@ function AddUserModal({ handleAdd }) {
       editedUser.birthYear.toString().length !== 4
     )
       return alert("enter a valid Year of Birth ");
-    else if (Object.values(editedUser).indexOf("") === -1) {
+    else if (
+      Object.values(editedUser)
+        .map(el => (el ? el.trim() : el))
+        .indexOf("") === -1
+    ) {
       handleAdd(editedUser);
       setShow(false);
       setEditedUser({

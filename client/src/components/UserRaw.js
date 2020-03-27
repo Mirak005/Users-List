@@ -8,26 +8,31 @@ import tick from "../assets/icons/tick.svg";
 import gallery from "../assets/icons/gallery.svg";
 import remove from "../assets/icons/delete.svg";
 
-function UserRaw({
-  user: { name, lastName, birthYear, birthLocation, _id },
-  handleEdit,
-  handleDelete,
-  index
-}) {
+function UserRaw({ user, handleEdit, handleDelete, index }) {
   //check if the user is on edit state to disable the readOnly
   const [isEdited, setEdit] = useState(false);
   //save the changes in edited User
-  const [editedUser, setEditedUser] = useState({
-    name,
-    lastName,
-    birthLocation,
-    birthYear
-  });
-  // on Click apply the edit
+  const [editedUser, setEditedUser] = useState(user);
+  // on check validation and apply the edit
   const handleIsEdited = () => {
-    handleEdit(_id, editedUser);
-
-    setEdit(!isEdited);
+    if (
+      editedUser.birthYear < 1900 &&
+      editedUser.birthYear.toString().length !== 4
+    ) {
+      alert("enter a valid Year of Birth ");
+      setEditedUser(user);
+      setEdit(!isEdited);
+    } else if (
+      Object.values(editedUser)
+        .map(el => el ? el.trim() : el )
+        .indexOf("") === -1
+    ) {
+      return handleEdit(user._id, editedUser, setEdit(!isEdited));
+    } else {
+      alert("Invalid ");
+      setEditedUser(user);
+      setEdit(!isEdited);
+    }
   };
   //handleChanges
   const handelChange = e => {
@@ -42,7 +47,7 @@ function UserRaw({
             <FormControl
               readOnly={!isEdited}
               bsPrefix={isEdited ? "edited-active" : "user-info"}
-              value={isEdited ? editedUser.name : name}
+              value={isEdited ? editedUser.name : user.name}
               name={"name"}
               onChange={handelChange}
             />
@@ -51,7 +56,7 @@ function UserRaw({
             <FormControl
               readOnly={!isEdited}
               bsPrefix={isEdited ? "edited-active" : "user-info"}
-              value={isEdited ? editedUser.lastName : lastName}
+              value={isEdited ? editedUser.lastName : user.lastName}
               name={"lastName"}
               onChange={handelChange}
             />
@@ -60,7 +65,7 @@ function UserRaw({
             <FormControl
               readOnly={!isEdited}
               bsPrefix={isEdited ? "edited-active" : "user-info"}
-              value={isEdited ? editedUser.birthYear : birthYear}
+              value={isEdited ? editedUser.birthYear : user.birthYear}
               name={"birthYear"}
               onChange={handelChange}
             />
@@ -69,13 +74,13 @@ function UserRaw({
             <FormControl
               readOnly={!isEdited}
               bsPrefix={isEdited ? "edited-active" : "user-info"}
-              value={isEdited ? editedUser.birthLocation : birthLocation}
+              value={isEdited ? editedUser.birthLocation : user.birthLocation}
               name={"birthLocation"}
               onChange={handelChange}
             />
           </td>
           <td>
-            <Link to={`/${name} ${lastName}/${_id}`}>
+            <Link to={`/${user.name} ${user.lastName}/${user._id}`}>
               {" "}
               <Image className=" mr-3" as="input" type="submit" src={gallery} />
             </Link>
@@ -84,14 +89,14 @@ function UserRaw({
               as="input"
               type="submit"
               src={isEdited ? tick : edit}
-              onClick={e => (isEdited ? handleIsEdited() : setEdit(!isEdited))}
+              onClick={() => (isEdited ? handleIsEdited() : setEdit(!isEdited))}
             />
             <Image
               className="ml-2 mr-2"
               as="input"
               type="submit"
               src={remove}
-              onClick={() => handleDelete(_id)}
+              onClick={() => handleDelete(user._id)}
             />
           </td>
         </tr>
