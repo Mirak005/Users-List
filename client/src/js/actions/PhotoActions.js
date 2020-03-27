@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_PHOTOS, PHOTOS_LOADING } from "../const/actionTypes";
+import { GET_PHOTOS, PHOTOS_LOADING, DELETE_PHOTO, ADD_PHOTO } from "../const/actionTypes";
 
 //get All photos
 
@@ -13,7 +13,7 @@ export const getPhotos = () => dispatch => {
 
 //delete photo
 export const deletePhoto = id => dispatch => {
-  dispatch(setPhotosLoading());
+  dispatch({type : DELETE_PHOTO});
 
   axios
     .delete(`/api/photo/${id}`)
@@ -22,7 +22,7 @@ export const deletePhoto = id => dispatch => {
 };
 //add photo
 export const addPhoto = (id, newPhoto) => dispatch => {
-  dispatch(setPhotosLoading());
+  dispatch({type:ADD_PHOTO});
 
   axios
     .post(`/api/photo/${id}`, newPhoto)
